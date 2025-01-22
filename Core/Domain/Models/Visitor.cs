@@ -1,16 +1,24 @@
+using Domain.Common;
+
 namespace Domain.Models
 {
-    public class Visitor
+    public class Visitor: BaseAuditEntity
     {
-        /// <summary>
-        /// Gets or sets the visitor's ID.
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Gets or sets the visitor's name.
         /// </summary>
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the visitor's last name.
+        /// </summary>
+        public string LastName { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the visitor's email.
+        /// </summary>
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the visitor's position.
@@ -21,27 +29,14 @@ namespace Domain.Models
         /// Gets or sets the visitor's department.
         /// </summary>
         public string Department { get; set; }
+         /// <summary>
+        /// Gets or sets the visitor's phone number.
+        /// </summary>
+        public string PhoneNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the visit date.
+        /// Gets or sets the visits associated with the visitor.
         /// </summary>
-        public DateTime VisitDate { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Visitor"/> class.
-        /// </summary>
-        /// <param name="id">The visitor's ID.</param>
-        /// <param name="name">The visitor's name.</param>
-        /// <param name="position">The visitor's position.</param>
-        /// <param name="department">The visitor's department.</param>
-        /// <param name="visitDate">The visit date.</param>
-        public Visitor(int id, string name, string position, string department, DateTime visitDate)
-        {
-            Id = id;
-            Name = name;
-            Position = position;
-            Department = department;
-            VisitDate = visitDate;
-        }
+        public ICollection<Visit> Visits { get; set; }
     }
 }

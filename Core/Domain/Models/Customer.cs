@@ -7,10 +7,6 @@ namespace Domain.Models
     /// </summary>
     public class Customer: BaseAuditEntity
     {
-        /// <summary>
-        /// Gets or sets the unique identifier for the customer.
-        /// </summary>
-        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or sets the first name of the customer.
@@ -33,13 +29,15 @@ namespace Domain.Models
         public string PhoneNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the date when the customer was created.
+        /// Gets or sets the visits associated with the customer.
         /// </summary>
-        public DateTime CreatedDate { get; set; }
+        public ICollection<Visit> Visits { get; set; }
 
-        /// <summary>
-        /// Gets or sets the date when the customer was last updated.
+         /// <summary>
+        /// Gets or sets the address of the customer.
         /// </summary>
-        public DateTime UpdatedDate { get; set; }
+        public string Address { get; set; }
+        public string ZipCode { get; set; }
+        public string City { get; set; }
     }
 }
