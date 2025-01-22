@@ -7,10 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentattion", "Presentatt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "Presentattion\WebApp\WebApp.csproj", "{8D48BE03-1646-4755-A36A-19F3D5B7A5FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{CC0559CC-8421-4834-B565-D9A7DFC7F5BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{105801B9-6BD0-4709-ABE5-8CC670AF57BE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{35B0A13C-8FD4-4823-8978-B94B2558519B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Core\Domain\Domain.csproj", "{570D179E-39AF-4812-9C8A-0ACC53E8196F}"
@@ -21,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insfraestructure", "Insfrae
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Insfraestructure\Persistence\Persistence.csproj", "{E9E60CBC-1FD8-4E41-9220-4DA53567AEB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogin", "Insfraestructure\BusinessLogin\BusinessLogin.csproj", "{BBE88894-27A2-4B55-91FA-64B4F18D9A29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "Insfraestructure\BusinessLogic\BusinessLogic.csproj", "{BBE88894-27A2-4B55-91FA-64B4F18D9A29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
