@@ -17,5 +17,11 @@ public class VisitorConfiguration: IEntityTypeConfiguration<Visitor>
         builder.Property(c => c.CreatedDate).IsRequired();
          builder.Property(c => c.LastModifiedBy);
         builder.Property(c => c.LastModifiedDate);
+        
+        builder.HasMany<Visit>(v => v.Visits)
+            .WithOne(v => v.Visitor)
+            .HasForeignKey(v => v.VisitorId);
+        
+        builder.ToTable("Visitors");
     }
 }

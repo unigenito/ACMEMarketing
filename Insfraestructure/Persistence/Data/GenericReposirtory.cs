@@ -13,43 +13,43 @@ public class GenericReposirtory<TEntity>: IGenericRepository<TEntity> where TEnt
         _appDbContext = context;
         _dbSet = context.Set<TEntity>();
     }
-    public Task<TEntity> GetByIdAsync(int id)
+    public async Task<TEntity?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _dbSet.FindAsync(id);
     }
 
-    public Task<IEnumerable<TEntity>> GetAllAsync()
+    public async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _dbSet.ToListAsync();
     }
 
-    public Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, IList<string>? includes = null)
+    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, IList<string>? includes = null)
     {
-        throw new NotImplementedException();
+        return await _dbSet.Where(predicate).ToListAsync();
     }
 
-    public Task AddAsync(TEntity entity)
+    public async Task AddAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        await _dbSet.AddAsync(entity);
     }
 
-    public Task UpdateAsync(TEntity entity)
+    public async Task UpdateAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        await Task.Run(() => _dbSet.Update(entity));
     }
 
-    public Task AddRangeAsync(IEnumerable<TEntity> entities)
+    public async Task AddRangeAsync(IEnumerable<TEntity> entities)
     {
-        throw new NotImplementedException();
+        await _dbSet.AddRangeAsync(entities);
     }
 
-    public Task RemoveAsync(TEntity entity)
+    public void Remove(TEntity entity)
     {
-        throw new NotImplementedException();
+         _dbSet.Remove(entity);
     }
 
-    public Task RemoveRangeAsync(IEnumerable<TEntity> entities)
+    public void RemoveRange(IEnumerable<TEntity> entities)
     {
-        throw new NotImplementedException();
+        _dbSet.RemoveRange(entities);
     }
 }

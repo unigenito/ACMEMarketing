@@ -12,23 +12,18 @@ public class UnitOfWork: IUnitOfwork
         _context = context;
     }
 
-    public IGenericRepository<TEntity> GenericRepository<TEntity>() where TEntity : class
+    public IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : class
     {
         return new GenericReposirtory<TEntity>(_context);
     }
 
+    public async Task<int> CompleteAsync()
+    {
+        return await _context.SaveChangesAsync();
+    }
+
     public void Dispose()
     {
-        throw new NotImplementedException();
-    }
-
-    public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> CompleteAsync()
-    {
-        throw new NotImplementedException();
+        _context.Dispose();
     }
 }

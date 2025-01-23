@@ -1,10 +1,14 @@
 ﻿using Domain.Common;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
 
 public class AppDbContext: DbContext
 {
+    public DbSet<Visit> Visits { get; set; }
+    public DbSet<Visitor> Visitors { get; set; }
+    public DbSet<Customer> Customers { get; set; }
     public AppDbContext(DbContextOptions<AppDbContext> options):base(options) {}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,6 +21,7 @@ public class AppDbContext: DbContext
         var entries = ChangeTracker.Entries<BaseAuditEntity>()
             .Where(e => e.State.Equals(EntityState.Modified) && e.Properties.Any(p => p.IsModified) ||
                         e.State.Equals(EntityState.Added));
+                        
         foreach (var entry in entries)   
         {
             switch (entry.State)
