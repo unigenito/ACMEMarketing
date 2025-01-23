@@ -38,5 +38,6 @@ namespace Domain.Models
         /// Gets or sets the visits associated with the visitor.
         /// </summary>
         public ICollection<Visit> Visits { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

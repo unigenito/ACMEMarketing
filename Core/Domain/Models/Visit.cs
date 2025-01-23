@@ -43,4 +43,5 @@ public class Visit: BaseAuditEntity
         /// </summary>
         public Visitor Visitor { get; set; }
 
+        public bool IsDeleted { get; set; }
 }
