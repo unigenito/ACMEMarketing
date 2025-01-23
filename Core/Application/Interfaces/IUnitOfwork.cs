@@ -2,6 +2,6 @@
 
 public interface IUnitOfwork:IDisposable
 {
-    IGenericRepository<TEntity> Repository<TEntity>() where TEntity : class;
+    IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
     Task<int> CompleteAsync();
 }
