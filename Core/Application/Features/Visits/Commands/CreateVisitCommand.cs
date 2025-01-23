@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Features.Visits.Commands;
 
-public record CreateVisitCommand(int customerId, int visitorId, DateTime visitDate, string purpose): IRequest<Unit>;
+public record CreateVisitCommand(int CustomerId, int VisitorId, DateTime VisitDate, string Purpose, string Note): IRequest<Unit>;
 
 public class CreateVisitCommandHandler : IRequestHandler<CreateVisitCommand, Unit>
 {
@@ -20,8 +20,8 @@ public class CreateVisitCommandHandler : IRequestHandler<CreateVisitCommand, Uni
 
     public async Task<Unit> Handle(CreateVisitCommand request, CancellationToken cancellationToken)
     {
-        var customer = _mapper.Map<Domain.Models.Visit>(request);
-        await _unitOfwork.Repository<Domain.Models.Visit>().AddAsync(customer);
+        var customer = _mapper.Map<Visit>(request);
+        await _unitOfwork.GetRepository<Visit>().AddAsync(customer);
         return Unit.Value;
     }
 }

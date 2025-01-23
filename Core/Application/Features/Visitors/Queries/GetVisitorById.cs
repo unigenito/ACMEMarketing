@@ -4,9 +4,9 @@ using AutoMapper;
 using Domain.Models;
 using MediatR;
 namespace Application.Features.Visitors.Queries;
-public record GetVisitorById(int Id) : IRequest<List<VisitorDto>>;
+public record GetVisitorById(int Id) : IRequest<VisitorDto>;
 
-public class GetVisitorHandler : IRequestHandler<GetVisitorById, List<VisitorDto>>
+public class GetVisitorHandler : IRequestHandler<GetVisitorById, VisitorDto>
 {
     private readonly IUnitOfwork _unitOfWork;
     private readonly IMapper _mapper;
@@ -17,9 +17,9 @@ public class GetVisitorHandler : IRequestHandler<GetVisitorById, List<VisitorDto
         _mapper = mapper;
     }
 
-    public async Task<List<VisitorDto>> Handle(GetVisitorById request, CancellationToken cancellationToken)
+    public async Task<VisitorDto> Handle(GetVisitorById request, CancellationToken cancellationToken)
     {
-        var visits = await _unitOfWork.Repository<Visitor>().GetAllAsync();
-        return _mapper.Map<List<VisitorDto>>(visits);
+        var visits = await _unitOfWork.GetRepository<Visitor>().GetAllAsync();
+        return _mapper.Map<VisitorDto>(visits);
     }
 }

@@ -7,11 +7,7 @@ using System.Collections.Generic;
 
 namespace ACMEMarketing.Core.Application.Features.Visitors.Queries
 {
-    public record GetAllVisitors(
-        int Id,
-        string Name,
-        string Email,
-        string PhoneNumber) : IRequest<List<VisitorDto>>;
+    public record GetAllVisitors() : IRequest<List<VisitorDto>>;
             
     public class GetAllVisitorsHandler : IRequestHandler<GetAllVisitors, List<VisitorDto>>{
         private readonly IUnitOfwork _unitOfWork;
@@ -23,7 +19,7 @@ namespace ACMEMarketing.Core.Application.Features.Visitors.Queries
         }
 
         public async Task<List<VisitorDto>> Handle(GetAllVisitors request, CancellationToken cancellationToken){
-            var visits = await _unitOfWork.Repository<Visitor>().GetAllAsync();
+            var visits = await _unitOfWork.GetRepository<Visitor>().GetAllAsync();
             return _mapper.Map<List<VisitorDto>>(visits);
         }
     }

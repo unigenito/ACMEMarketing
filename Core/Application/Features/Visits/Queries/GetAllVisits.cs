@@ -1,10 +1,9 @@
-﻿using MediatR;
-using Domain.Models;
+﻿using Application.DTOs;
 using Application.Interfaces;
-using Application.DTOs;
 using AutoMapper;
+using MediatR;
 
-namespace Application.Features.Visit.Queries;
+namespace Application.Features.Visits.Queries;
 
 public record GetAllVisits(): IRequest<List<VisitDto>>;
 
@@ -21,7 +20,7 @@ public class GetAllVisitsHandler : IRequestHandler<GetAllVisits, List<VisitDto>>
 
     public async Task<List<VisitDto>> Handle(GetAllVisits request, CancellationToken cancellationToken)
     {
-        var Visit = await _unitOfWork.Repository<Domain.Models.Visit>().GetAllAsync();
+        var Visit = await _unitOfWork.GetRepository<Domain.Models.Visit>().GetAllAsync();
         return _mapper.Map<List<VisitDto>>(Visit);
     }
 }

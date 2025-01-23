@@ -3,9 +3,9 @@ using AutoMapper;
 using Domain.Models;
 using MediatR;
 
-namespace ACMEMarketing.Core.Application.Features.Visitors.Command
+namespace Application.Features.Visitors.Command
 {
-    public record UpdateVisitorCommand(int Id, string Name, string LastName, string Email) : IRequest<Unit>;
+    public record UpdateVisitorCommand(int Id, string Name, string LastName, string Email, string Phone, string Position, string Department) : IRequest<Unit>;
 
     public class UpdateVisitorCommandHandler : IRequestHandler<UpdateVisitorCommand, Unit>
     {
@@ -20,11 +20,10 @@ namespace ACMEMarketing.Core.Application.Features.Visitors.Command
 
         public async Task<Unit> Handle(UpdateVisitorCommand request, CancellationToken cancellationToken)
         {
-            var visitor = await _unitOfWork.Repository<Visitor>().GetByIdAsync(request.Id);
+            Visitor? visitor = await _unitOfWork.GetRepository<Visitor>().GetByIdAsync(request.Id);
+            
             if (visitor == null)
-            {
-                throw new KeyNotFoundException(nameof(Visitor));
-            }
+                throw new KeyNotFoundException($"The visitor {request.Id} was not found");
 
             visitor.FirstName = request.Name;
             visitor.LastName = request.LastName;

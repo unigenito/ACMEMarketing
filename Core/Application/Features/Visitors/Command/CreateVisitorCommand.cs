@@ -3,9 +3,16 @@ using AutoMapper;
 using Domain.Models;
 using MediatR;
 
-namespace ACMEMarketing.Core.Application.Features.Visitors.Command
+namespace Application.Features.Visitors.Command
 {
-    public record CreateVisitorCommand(string Name, string LastName, string Email, DateTime VisitDate) : IRequest<Unit>;
+    public record CreateVisitorCommand(
+        string Name,
+        string LastName,
+        string Email,
+        DateTime VisitDate,
+        string Position,
+        string Department,
+        string Phone) : IRequest<Unit>;
 
     public class CreateVisitorCommandHandler : IRequestHandler<CreateVisitorCommand, Unit>
     {
@@ -22,7 +29,7 @@ namespace ACMEMarketing.Core.Application.Features.Visitors.Command
         {
             var visitor = _mapper.Map<Visitor>(request);
 
-            await _unitOfWork.Repository<Visitor>().AddAsync(visitor);
+            await _unitOfWork.GetRepository<Visitor>().AddAsync(visitor);
             await _unitOfWork.CompleteAsync();
 
             return Unit.Value;

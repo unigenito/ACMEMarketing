@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Features.Visits.Commands;
 
-public record UpdateVisitCommand(int VisitId, DateTime Date, string Note) : IRequest<Unit>;
+public record UpdateVisitCommand(int VisitId, DateTime Date, string Note, string Purpose) : IRequest<Unit>;
 
 public class UpdateVisitCommandHandler : IRequestHandler<UpdateVisitCommand, Unit>
 {
@@ -20,10 +20,10 @@ public class UpdateVisitCommandHandler : IRequestHandler<UpdateVisitCommand, Uni
 
     public async Task<Unit> Handle(UpdateVisitCommand request, CancellationToken cancellationToken)
     {
-        var visit = await _unitOfWork.Repository<Domain.Models.Visit>().GetByIdAsync(request.VisitId);
+        var visit = await _unitOfWork.GetRepository<Visit>().GetByIdAsync(request.VisitId);
         if (visit == null)
         {
-            throw new KeyNotFoundException(nameof(Visit));
+            throw new KeyNotFoundException($"Visit with id {request.VisitId} not found");
         }
 
         visit.VisitDate = request.Date;

@@ -21,7 +21,7 @@ public class GetAllCustomersHandler : IRequestHandler<GetAllCustomers, List<Cust
 
     public async Task<List<CustomerDto>> Handle(GetAllCustomers request, CancellationToken cancellationToken)
     {
-        var customers = await _unitOfwork.Repository<Customer>().GetAllAsync();
+        var customers = await _unitOfwork.GetRepository<Customer>().GetAllAsync();
         return _mapper.Map<List<CustomerDto>>(customers);
     }
 }

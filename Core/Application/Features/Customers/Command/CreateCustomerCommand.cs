@@ -6,7 +6,8 @@ using MediatR;
 
 namespace Application.Features.Customers.Command;
 
-public record CreateCustomerCommand(string Name, string Email, string Phone) : IRequest<Unit>;
+public record CreateCustomerCommand(string Name, string LastName, string Email, string Phone, string Street, string City, string ZipCode)
+    : IRequest<Unit>;
 
 public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Unit>
 {
@@ -22,7 +23,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
     public async Task<Unit> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = _mapper.Map<Customer>(request);
-        await _unitOfwork.Repository<Customer>().AddAsync(customer);
+        await _unitOfwork.GetRepository<Customer>().AddAsync(customer);
         //await _unitOfwork.CommitAsync();
         return Unit.Value;
     }
