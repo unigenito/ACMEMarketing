@@ -1,0 +1,45 @@
+@model Application.Commands.CreateVisitCommand
+
+@{
+    ViewData["Title"] = "Create Visit";
+}
+
+<h1>Create Visit</h1>
+
+<h4>Visit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <input asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitorId" class="control-label"></label>
+                <input asp-for="VisitorId" class="form-control" />
+                <span asp-validation-for="VisitorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Purpose" class="control-label"></label>
+                <input asp-for="Purpose" class="form-control" />
+                <span asp-validation-for="Purpose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>            
+            </div>
+        </form>
+    </div>
+</div>
