@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Features.Visitors.Command;
 using AutoMapper;
 using Domain.Models;
 
@@ -20,5 +21,14 @@ public class VisitorMapper: Profile
         .ForMember(dest => dest.TotalVisits, opt => opt.MapFrom(src => src.Visits.Count))
         .ForMember(dest => dest.VisitsCompleted, opt => opt.MapFrom(src => src.Visits.Count(v => v.VisitDate != null)))
         .ReverseMap();
+
+        CreateMap<CreateVisitorCommand, Visitor>()
+        .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Name))
+        .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+        .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Phone))
+        .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position))
+        .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department))
+        .ForMember(dest => dest.Visits, opt => opt.Ignore());
     }
 }
