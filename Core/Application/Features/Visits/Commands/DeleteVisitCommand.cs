@@ -17,7 +17,7 @@ public class DeleteVisitCommandHandler : IRequestHandler<DeleteVisitCommand, Uni
 
     public async Task<Unit> Handle(DeleteVisitCommand request, CancellationToken cancellationToken)
     {
-        Visit? visit = await _unitOfWork.GetRepository<Visit>().GetByIdAsync(request.Id);
+        Visit? visit = await _unitOfWork.GetRepository<Visit>().GetByIdAsync(e => e.IsDeleted == false && e.Id ==request.Id);
 
         if (visit == null)
             throw new KeyNotFoundException($"The visit was {request.Id} not found");

@@ -18,8 +18,6 @@
             <th>Email</th>
             <th>Phone Number</th>
             <th>Address</th>
-            <th>City</th>
-            <th>Zip Code</th>
             <th>Total Visits</th>
             <th>Pending</th>
             <th></th>
@@ -37,7 +35,7 @@
                 <td>@item.TotalVisited</td>
                 <th>@item.Pending</th>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="fa fa-pencil" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>

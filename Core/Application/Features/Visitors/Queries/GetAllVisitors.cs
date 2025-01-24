@@ -19,7 +19,7 @@ namespace ACMEMarketing.Core.Application.Features.Visitors.Queries
         }
 
         public async Task<List<VisitorDto>> Handle(GetAllVisitors request, CancellationToken cancellationToken){
-            var visits = await _unitOfWork.GetRepository<Visitor>().GetAllAsync();
+            var visits = await _unitOfWork.GetRepository<Visitor>().FindAsync(e => e.IsDeleted == false);
             return _mapper.Map<List<VisitorDto>>(visits);
         }
     }

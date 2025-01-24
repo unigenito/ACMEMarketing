@@ -13,9 +13,9 @@ public class GenericReposirtory<TEntity>: IGenericRepository<TEntity> where TEnt
         _appDbContext = context;
         _dbSet = context.Set<TEntity>();
     }
-    public async Task<TEntity?> GetByIdAsync(int id)
+    public async Task<TEntity?> GetByIdAsync(Expression<Func<TEntity, bool>> predicate)
     {
-        return await _dbSet.FindAsync(id);
+        return await _dbSet.FindAsync(predicate);
     }
 
     public async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -25,7 +25,17 @@ public class GenericReposirtory<TEntity>: IGenericRepository<TEntity> where TEnt
 
     public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, IList<string>? includes = null)
     {
-        return await _dbSet.Where(predicate).ToListAsync();
+        var query = _dbSet.AsQueryable();
+        
+        if (includes != null)
+        {
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+            
+        }
+        return await query.Where(predicate).ToListAsync();
     }
 
     public async Task AddAsync(TEntity entity)

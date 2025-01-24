@@ -36,4 +36,6 @@
         /// Gets or sets any additional notes about the visit.
         /// </summary>
         public string Notes { get; set; }
+
+        public DateTime? VisitedDate { get; set; }
     }

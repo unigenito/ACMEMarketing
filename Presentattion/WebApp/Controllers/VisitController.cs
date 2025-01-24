@@ -69,7 +69,7 @@ public class VisitController : BaseController
         {
             await Mediator.Send(new UpdateVisitCommand(
                 visit.Id,
-                visit.VisitDate,
+                visit.VisitedDate ?? DateTime.Now,
                 visit.Notes,
                 visit.Purpose
             ));

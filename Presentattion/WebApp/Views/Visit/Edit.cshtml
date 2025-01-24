@@ -13,27 +13,32 @@
         <form asp-action="Edit">
             <div class="mb-3">
                 <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" class="form-control" />
+                <input asp-for="CustomerName" class="form-control" disabled/>
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="VisitorName" class="control-label"></label>
-                <input asp-for="VisitorName" class="form-control" />
+                <input asp-for="VisitorName" class="form-control" disabled/>
                 <span asp-validation-for="VisitorName" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="VisitDate" class="control-label"></label>
-                <input asp-for="VisitDate" class="form-control" />
+                <input asp-for="VisitDate" class="form-control" type="date" disabled/>
                 <span asp-validation-for="VisitDate" class="text-danger"></span>
             </div>
             <div class="mb-3">
+                <label asp-for="VisitedDate" class="control-label"></label>
+                <input asp-for="VisitedDate" class="form-control" type="date"/>
+                <span asp-validation-for="VisitedDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
                 <label asp-for="Purpose" class="control-label"></label>
-                <input asp-for="Purpose" class="form-control" />
+                <input asp-for="Purpose" class="form-control" maxlength="200" />
                 <span asp-validation-for="Purpose" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Notes" class="control-label"></label>
-                <textarea asp-for="Notes" class="form-control" ></textarea>
+                <input asp-for="Notes" class="form-control" maxlength="500" />
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="mb-3">

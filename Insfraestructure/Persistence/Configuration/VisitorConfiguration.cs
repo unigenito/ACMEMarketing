@@ -10,9 +10,12 @@ public class VisitorConfiguration: IEntityTypeConfiguration<Visitor>
     {
         builder.HasKey(v => v.Id);
         builder.Property(v => v.Id).ValueGeneratedOnAdd();
+        builder.Property(c => c.Identification).IsRequired().HasMaxLength(15);
         builder.Property(v => v.FirstName).IsRequired().HasMaxLength(50);
         builder.Property(v => v.LastName).IsRequired().HasMaxLength(50);
+        builder.Property(c => c.Genere).IsRequired().HasMaxLength(1);
         builder.Property(v => v.Email).IsRequired().HasMaxLength(50);
+        builder.Property(c => c.IsDeleted).HasDefaultValue(0);
         builder.Property(c => c.CreatedBy).IsRequired();
         builder.Property(c => c.CreatedDate).IsRequired();
          builder.Property(c => c.LastModifiedBy);

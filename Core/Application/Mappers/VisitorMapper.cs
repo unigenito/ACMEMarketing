@@ -18,13 +18,14 @@ public class VisitorMapper: Profile
         .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position))
         .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department))
         .ForMember(dest => dest.LastVisitDate, opt => opt.MapFrom(src => src.Visits.Select(v => v.VisitDate).LastOrDefault()))
-        .ForMember(dest => dest.TotalVisits, opt => opt.MapFrom(src => src.Visits.Count))
-        .ForMember(dest => dest.VisitsCompleted, opt => opt.MapFrom(src => src.Visits.Count(v => v.VisitDate != null)))
+        .ForMember(dest => dest.TotalVisits, opt => opt.MapFrom(src => src.Visits.Count(e => e.IsDeleted == false)))
+        .ForMember(dest => dest.VisitsCompleted, opt => opt.MapFrom(src => src.Visits.Count(v => v.VisitedDate != null && v.IsDeleted == false)))
         .ReverseMap();
 
         CreateMap<CreateVisitorCommand, Visitor>()
         .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.Name))
         .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+        .ForMember(dest => dest.Genere, opt => opt.MapFrom(src => src.Sex))
         .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
         .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Phone))
         .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Position))

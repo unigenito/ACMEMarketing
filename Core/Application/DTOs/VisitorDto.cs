@@ -7,6 +7,10 @@
     {
         public int Id { get; set; }
         /// <summary>
+        /// Gets or sets the visitor's identification.
+        /// </summary>
+        public string Identification { get; set; }
+        /// <summary>
         /// Gets or sets the visitor's name.
         /// </summary>
         public string Name { get; set; }
@@ -14,6 +18,10 @@
         /// Gets or sets the visitor's last name.
         /// </summary>
         public string LastName { get; set; }
+        /// <summary>
+        /// Gets or sets the visitor's sex.
+        /// </summary>
+        public string Sex { get; set; }
 
         /// <summary>
         /// Gets or sets the visitor's position.

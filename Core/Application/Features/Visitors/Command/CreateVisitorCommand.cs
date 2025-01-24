@@ -7,13 +7,14 @@ namespace Application.Features.Visitors.Command
 {
     public class CreateVisitorCommand : IRequest<Unit>
     {
+        public string Identification { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public DateTime VisitDate { get; set; }
         public string Position { get; set; }
         public string Department { get; set; }
         public string Phone { get; set; }
+        public string Sex { get; set; }
     }
 
     public class CreateVisitorCommandHandler : IRequestHandler<CreateVisitorCommand, Unit>

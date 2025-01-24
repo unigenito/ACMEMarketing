@@ -8,14 +8,14 @@ namespace Application.Validators.Visit
         public CreateVisitCommandValidator()
         {
             RuleFor(x => x.CustomerId)
-                .NotEmpty().WithMessage("Customer ID is required.");
+                .NotEmpty().WithMessage("Customer is required.");
 
             RuleFor(x => x.VisitorId)
-                .NotEmpty().WithMessage("Visitor ID is required.");
+                .NotEmpty().WithMessage("Visitor is required.");
 
             RuleFor(x => x.VisitDate)
                 .NotEmpty().WithMessage("Visit date is required.")
-                .LessThanOrEqualTo(DateTime.Now).WithMessage("Visit date cannot be in the future.");
+                .LessThanOrEqualTo(DateTime.Now).WithMessage("Visit date cannot be in the past.");
 
             RuleFor(x => x.Purpose)
                 .NotEmpty().WithMessage("Purpose is required.")

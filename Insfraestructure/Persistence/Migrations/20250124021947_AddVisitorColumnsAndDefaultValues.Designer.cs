@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -10,9 +11,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250124021947_AddVisitorColumnsAndDefaultValues")]
+    partial class AddVisitorColumnsAndDefaultValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
@@ -57,7 +60,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Identification")
                         .IsRequired()
-                        .HasMaxLength(15)
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")
@@ -135,9 +138,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("VisitDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("VisitedDate")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("VisitorId")
                         .HasColumnType("INTEGER");
 
@@ -177,14 +177,9 @@ namespace Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Genere")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Identification")
                         .IsRequired()
-                        .HasMaxLength(15)
+                        .HasMaxLength(9)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsDeleted")

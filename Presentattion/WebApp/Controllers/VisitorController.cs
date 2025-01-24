@@ -4,6 +4,7 @@ using Application.Features.Visitors.Command;
 using Application.Features.Visitors.Queries;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp.Controllers.Base.Controllers;
 using WebApp.Extentions;
 
@@ -24,6 +25,12 @@ public class VisitorController : BaseController
 
     public IActionResult Create()
     {
+        ViewBag.Genders = new SelectList(new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Male", Value = "M" },
+            new SelectListItem { Text = "Female", Value = "F" }
+        }, "Value", "Text");
+        
         return View();
     }
 
@@ -61,8 +68,6 @@ public class VisitorController : BaseController
         {
             await Mediator.Send(new UpdateVisitorCommand(
                 visitor.Id,
-                visitor.Name,
-                visitor.LastName,
                 visitor.Email,
                 visitor.Phone,
                 visitor.Position,

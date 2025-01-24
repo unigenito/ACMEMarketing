@@ -20,8 +20,9 @@ public class CreateVisitCommandHandler : IRequestHandler<CreateVisitCommand, Uni
 
     public async Task<Unit> Handle(CreateVisitCommand request, CancellationToken cancellationToken)
     {
-        var customer = _mapper.Map<Visit>(request);
-        await _unitOfwork.GetRepository<Visit>().AddAsync(customer);
+        var visit = _mapper.Map<Visit>(request);
+        await _unitOfwork.GetRepository<Visit>().AddAsync(visit);
+        await _unitOfwork.CompleteAsync();
         return Unit.Value;
     }
 }

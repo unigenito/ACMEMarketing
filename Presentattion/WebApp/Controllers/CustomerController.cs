@@ -27,8 +27,8 @@ public class CustomerController : BaseController
     {
         ViewBag.Genders = new SelectList(new List<SelectListItem>
         {
-            new SelectListItem { Text = "Male", Value = "Male" },
-            new SelectListItem { Text = "Female", Value = "Female" }
+            new SelectListItem { Text = "Male", Value = "M" },
+            new SelectListItem { Text = "Female", Value = "F" }
         }, "Value", "Text");
 
         return View();
@@ -68,8 +68,7 @@ public class CustomerController : BaseController
         {
             await Mediator.Send(new UpdateCustomerCommand(
                 customer.Id,
-                customer.FirstName,
-                customer.LastName,
+                customer.Country,
                 customer.Email,
                 customer.Phone,
                 customer.City,

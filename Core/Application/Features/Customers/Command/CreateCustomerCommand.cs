@@ -34,6 +34,7 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
     public async Task<Unit> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = _mapper.Map<Customer>(request);
+        
         await _unitOfwork.GetRepository<Customer>().AddAsync(customer);
         await _unitOfwork.CompleteAsync();
         return Unit.Value;

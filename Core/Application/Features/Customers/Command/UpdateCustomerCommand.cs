@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Features.Customers.Command;
 
-public record UpdateCustomerCommand(int Id, string Name, string LastName, string Email, string Phone, string City, string ZipCode, string Street) : IRequest<Unit>;
+public record UpdateCustomerCommand(int Id, string Country, string Email, string Phone, string City, string ZipCode, string Street) : IRequest<Unit>;
 
 public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Unit>
 {
@@ -20,12 +20,12 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
 
     public async Task<Unit> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        Customer? customer = await _unitOfwork.GetRepository<Customer>().GetByIdAsync(request.Id);
+        Customer? customer = await _unitOfwork.GetRepository<Customer>().GetByIdAsync(e => e.IsDeleted == false && e.Id ==request.Id);
         
         if (customer == null)
             throw new KeyNotFoundException($"The customer {request.Id} was not found");
 
-        customer.FirstName = request.Name;
+        customer.Country = request.Country;
         customer.Email = request.Email;
         customer.PhoneNumber = request.Phone;
         customer.City = request.City;

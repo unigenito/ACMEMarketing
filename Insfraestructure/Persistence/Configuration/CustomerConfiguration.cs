@@ -10,6 +10,7 @@ public class CustomerConfiguration: IEntityTypeConfiguration<Customer>
     {
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Id).ValueGeneratedOnAdd();
+        builder.Property(c => c.Identification).IsRequired().HasMaxLength(15);
         builder.Property(c => c.FirstName).IsRequired().HasMaxLength(50);
         builder.Property(c => c.LastName).IsRequired().HasMaxLength(50);
         builder.Property(c => c.Genere).IsRequired().HasMaxLength(1);
@@ -19,6 +20,7 @@ public class CustomerConfiguration: IEntityTypeConfiguration<Customer>
         builder.Property(c => c.Country).IsRequired().HasMaxLength(50);
         builder.Property(c => c.City).IsRequired().HasMaxLength(50);
         builder.Property(c => c.ZipCode).IsRequired().HasMaxLength(10);
+        builder.Property(c => c.IsDeleted).HasDefaultValue(0);
         builder.Property(c => c.CreatedBy).IsRequired();
         builder.Property(c => c.CreatedDate).IsRequired();
          builder.Property(c => c.LastModifiedBy);

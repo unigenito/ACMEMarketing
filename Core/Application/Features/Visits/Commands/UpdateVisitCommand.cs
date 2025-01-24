@@ -20,13 +20,13 @@ public class UpdateVisitCommandHandler : IRequestHandler<UpdateVisitCommand, Uni
 
     public async Task<Unit> Handle(UpdateVisitCommand request, CancellationToken cancellationToken)
     {
-        var visit = await _unitOfWork.GetRepository<Visit>().GetByIdAsync(request.VisitId);
+        var visit = await _unitOfWork.GetRepository<Visit>().GetByIdAsync(e => e.IsDeleted == false && e.Id ==request.VisitId);
         if (visit == null)
         {
             throw new KeyNotFoundException($"Visit with id {request.VisitId} not found");
         }
 
-        visit.VisitDate = request.Date;
+        visit.VisitedDate = request.Date;
         visit.Notes = request.Note;
 
         await _unitOfWork.CompleteAsync();

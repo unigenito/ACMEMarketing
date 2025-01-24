@@ -7,13 +7,6 @@ namespace Application.Validators.Customer
     {
         public UpdateCustomerCommandValidator()
         {
-            RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("First name is required.")
-                .MaximumLength(50).WithMessage("First name must not exceed 50 characters.");
-
-            RuleFor(x => x.LastName)
-                .NotEmpty().WithMessage("Last name is required.")
-                .MaximumLength(50).WithMessage("Last name must not exceed 50 characters.");
 
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Email is required.")
@@ -21,7 +14,7 @@ namespace Application.Validators.Customer
 
             RuleFor(x => x.Phone)
                 .NotEmpty().WithMessage("Phone number is required.")
-                .Matches(@"^\d{10}$").WithMessage("Phone number must be 10 digits.");
+                .Matches(@"^\d{10,15}$").WithMessage("Phone number must be 10-15 digits.");
 
             RuleFor(x => x.Street)
                 .NotEmpty().WithMessage("Street is required.")
@@ -33,7 +26,11 @@ namespace Application.Validators.Customer
 
             RuleFor(x => x.ZipCode)
                 .NotEmpty().WithMessage("Zip code is required.")
-                .Matches(@"^\d{5}$").WithMessage("Zip code must be 5 digits.");
+                .Matches(@"^\d{5,10}$").WithMessage("Zip code must be 5-10 digits.");
+            
+            RuleFor(x => x.Country)
+                .NotEmpty().WithMessage("Country is required.")
+                .MaximumLength(50).WithMessage("Country must not exceed 50 characters.");
         }
     }
 }

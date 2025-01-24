@@ -21,11 +21,12 @@ namespace Application.Validators.Customer
 
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Email is required.")
+                .MaximumLength(100).WithMessage("Email must not exceed 100 characters.")
                 .EmailAddress().WithMessage("A valid email is required.");
 
             RuleFor(x => x.Phone)
                 .NotEmpty().WithMessage("Phone number is required.")
-                .Matches(@"^\d{10}$").WithMessage("Phone number must be 10 digits.");
+                .Matches(@"^\d{10-15}$").WithMessage("Phone number must be 10-15 digits.");
 
             RuleFor(x => x.Street)
                 .NotEmpty().WithMessage("Street is required.")
@@ -37,7 +38,7 @@ namespace Application.Validators.Customer
 
             RuleFor(x => x.ZipCode)
                 .NotEmpty().WithMessage("Zip code is required.")
-                .Matches(@"^\d{5}$").WithMessage("Zip code must be 5 digits.");
+                .Matches(@"^\d{5,10}$").WithMessage("Zip code must be 5-10 digits.");
 
             RuleFor(x => x.Country)
                 .NotEmpty().WithMessage("Country is required.")
@@ -45,7 +46,7 @@ namespace Application.Validators.Customer
 
             RuleFor(x => x.Identification)
                 .NotEmpty().WithMessage("Identification is required.")
-                .Matches(@"^\d{9}$").WithMessage("Identification must be 9 digits.");
+                .Matches(@"^[A-Za-z0-9]+$").WithMessage("Identification must be letter or digits.");
         }
     }
 }

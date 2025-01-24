@@ -44,4 +44,5 @@ public class Visit: BaseAuditEntity
         public Visitor Visitor { get; set; }
 
         public bool IsDeleted { get; set; }
+        public DateTime? VisitedDate { get; set; }
 }

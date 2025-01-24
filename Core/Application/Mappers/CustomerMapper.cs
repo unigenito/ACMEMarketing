@@ -12,11 +12,13 @@ public class CustomerMapper: Profile
         CreateMap<Customer, CustomerDto>()
         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
         .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
+        
+        .ForMember(dest => dest.Sex, opt => opt.MapFrom(src => src.Genere))
         .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
         .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.PhoneNumber))
-        .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Street))
-        .ForMember(dest => dest.TotalVisited, opt => opt.MapFrom(src => src.Visits.Count))
-        .ForMember(dest => dest.Pending, opt => opt.MapFrom(src => src.Visits.Count(v => v.VisitDate == null)))  
+        .ForMember(dest => dest.Address, opt => opt.MapFrom(src => $"{src.Street}, {src.City} {src.Country}. ({src.ZipCode})"))
+        .ForMember(dest => dest.TotalVisited, opt => opt.MapFrom(src => src.Visits.Count(e => e.VisitedDate != null && e.IsDeleted == false)))
+        .ForMember(dest => dest.Pending, opt => opt.MapFrom(src => src.Visits.Count(v => v.VisitedDate == null && v.IsDeleted == false)))  
         .ReverseMap();
         
         CreateMap<CreateCustomerCommand, Customer>()

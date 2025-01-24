@@ -4,7 +4,10 @@ namespace Domain.Models
 {
     public class Visitor: BaseAuditEntity
     {
-
+        /// <summary>
+        /// Gets or sets the visitor's identification.
+        /// </summary>
+        public string Identification { get; set; }
         /// <summary>
         /// Gets or sets the visitor's name.
         /// </summary>
@@ -14,6 +17,10 @@ namespace Domain.Models
         /// Gets or sets the visitor's last name.
         /// </summary>
         public string LastName { get; set; }
+        /// <summary>
+        /// Gets or sets the visitor's genere.
+        /// </summary>
+        public string Genere { get; set; }
         
         /// <summary>
         /// Gets or sets the visitor's email.
