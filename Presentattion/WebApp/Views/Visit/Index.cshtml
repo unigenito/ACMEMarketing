@@ -1,0 +1,42 @@
+@model IEnumerable<Application.DTOs.VisitDto>
+
+@{
+    ViewData["Title"] = "Visits";
+}
+
+<h1>Visits</h1>
+
+<p>
+    <a asp-action="Create">Create new visit</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Visitor</th>
+            <th>Visit Date</th>
+            <th>Visited Date</th>
+            <th>Purpose</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CustomerName</td>
+                <td>@item.VisitorName</td>
+                <td>@item.VisitDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.VisitedDate?.ToString("yyyy-MM-dd")</td>
+                <td>@item.Purpose</td>
+                <td>@item.Notes</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

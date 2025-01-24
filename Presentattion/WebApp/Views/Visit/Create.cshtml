@@ -1,0 +1,45 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Application.Features.Visits.Commands.CreateVisitCommand
+
+@{
+    ViewData["Title"] = "Create Visit";
+}
+
+<h1>Create Visit</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="VisitorId" class="control-label">Visitor</label>
+                <select asp-for="VisitorId" class="form-control" asp-items="ViewBag.Visitors"></select>
+                <span asp-validation-for="VisitorId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CustomerId" class="control-label">Customer</label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.Customers"></select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" class="form-control" type="date"/>
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Purpose" class="control-label"></label>
+                <input asp-for="Purpose" class="form-control" maxlength="200" />
+                <span asp-validation-for="Purpose" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Note" class="control-label"></label>
+                <input asp-for="Note" class="form-control" maxlength="500" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>            
+            </div>
+        </form>
+    </div>
+</div>
