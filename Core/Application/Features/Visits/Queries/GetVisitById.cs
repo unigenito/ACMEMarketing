@@ -21,7 +21,7 @@ public class GetVisitByIdHandler : IRequestHandler<GetVisitById, VisitDto>
 
     public async Task<VisitDto> Handle(GetVisitById request, CancellationToken cancellationToken)
     {
-        var visit = await _unitOfWork.GetRepository<Domain.Models.Visit>().GetByIdAsync(e => e.IsDeleted == false && e.Id ==request.Id);
+        var visit = await _unitOfWork.GetRepository<Domain.Models.Visit>().GetByIdAsync(e => e.IsDeleted == false && e.Id ==request.Id, new List<string>(){"Visitor","Customer"});
         if (visit == null)
         {
             throw new KeyNotFoundException(nameof(Visit));

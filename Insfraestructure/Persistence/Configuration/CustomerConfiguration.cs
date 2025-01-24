@@ -25,6 +25,8 @@ public class CustomerConfiguration: IEntityTypeConfiguration<Customer>
         builder.Property(c => c.CreatedDate).IsRequired();
          builder.Property(c => c.LastModifiedBy);
         builder.Property(c => c.LastModifiedDate);
+
+        builder.HasIndex(c => c.Identification).IsUnique();
         
         builder.HasMany<Visit>(v => v.Visits)
             .WithOne(v => v.Customer)

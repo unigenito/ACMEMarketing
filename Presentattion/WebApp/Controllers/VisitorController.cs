@@ -45,6 +45,12 @@ public class VisitorController : BaseController
         }
         catch (ValidationException e)
         {
+            ViewBag.Genders = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Male", Value = "M" },
+                new SelectListItem { Text = "Female", Value = "F" }
+            }, "Value", "Text");
+            
             ModelState.AddToModelState(e.Errors);
             return View(command);
         }

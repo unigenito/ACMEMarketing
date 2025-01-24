@@ -17,7 +17,7 @@ public class CustomerMapper: Profile
         .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
         .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.PhoneNumber))
         .ForMember(dest => dest.Address, opt => opt.MapFrom(src => $"{src.Street}, {src.City} {src.Country}. ({src.ZipCode})"))
-        .ForMember(dest => dest.TotalVisited, opt => opt.MapFrom(src => src.Visits.Count(e => e.VisitedDate != null && e.IsDeleted == false)))
+        .ForMember(dest => dest.TotalVisited, opt => opt.MapFrom(src => src.Visits.Count(e => e.IsDeleted == false)))
         .ForMember(dest => dest.Pending, opt => opt.MapFrom(src => src.Visits.Count(v => v.VisitedDate == null && v.IsDeleted == false)))  
         .ReverseMap();
         

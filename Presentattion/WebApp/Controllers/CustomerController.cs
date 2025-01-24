@@ -46,6 +46,11 @@ public class CustomerController : BaseController
         catch (ValidationException e)
         {
             ModelState.AddToModelState(e.Errors);
+            ViewBag.Genders = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Male", Value = "M" },
+                new SelectListItem { Text = "Female", Value = "F" }
+            }, "Value", "Text");
             return View(command);
         }
         catch (Exception e)

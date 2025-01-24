@@ -19,7 +19,7 @@ public class GetVisitorHandler : IRequestHandler<GetVisitorById, VisitorDto>
 
     public async Task<VisitorDto> Handle(GetVisitorById request, CancellationToken cancellationToken)
     {
-        var visits = await _unitOfWork.GetRepository<Visitor>().GetAllAsync();
+        var visits = await _unitOfWork.GetRepository<Visitor>().GetByIdAsync(e => e.Id == request.Id && e.IsDeleted == false);
         return _mapper.Map<VisitorDto>(visits);
     }
 }

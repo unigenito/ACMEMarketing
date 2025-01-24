@@ -47,6 +47,12 @@ public class VisitController : BaseController
         catch (FluentValidation.ValidationException e)
         {
             ModelState.AddToModelState(e.Errors);
+            
+            var visitors = await Mediator.Send(new GetAllVisitors());
+            ViewBag.Visitors = new SelectList(visitors.Select(v => new { v.Id, FullName = v.Name + " " + v.LastName }), "Id", "FullName");
+            var customers = await Mediator.Send(new GetAllCustomers());
+            ViewBag.Customers = new SelectList(customers.Select(v => new { v.Id, FullName = v.FirstName + " " + v.LastName }), "Id", "FullName");
+
             return View(command);
         }
         catch (Exception e)

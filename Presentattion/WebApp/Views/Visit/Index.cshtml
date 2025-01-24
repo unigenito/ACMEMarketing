@@ -10,12 +10,13 @@
     <a asp-action="Create">Create new visit</a>
 </p>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Customer</th>
             <th>Visitor</th>
             <th>Visit Date</th>
+            <th>Visited Date</th>
             <th>Purpose</th>
             <th>Notes</th>
             <th></th>
@@ -25,9 +26,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.CustomerId</td>
-                <td>@item.VisitorId</td>
+                <td>@item.CustomerName</td>
+                <td>@item.VisitorName</td>
                 <td>@item.VisitDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.VisitedDate?.ToString("yyyy-MM-dd")</td>
                 <td>@item.Purpose</td>
                 <td>@item.Notes</td>
                 <td>

@@ -12,7 +12,7 @@ namespace Application.Validators
 
             RuleFor(x => x.Date)
                 .NotEmpty().WithMessage("Visit date is required.")
-                .GreaterThan(DateTime.Now).WithMessage("Visit date cannot be in the future.");
+                .LessThanOrEqualTo(DateTime.Now).WithMessage("Visit date cannot be in the future.");
 
             RuleFor(x => x.Note)
                 .MaximumLength(500).WithMessage("Notes must not exceed 500 characters.");

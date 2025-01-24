@@ -26,7 +26,7 @@ namespace Application.Validators.Customer
 
             RuleFor(x => x.Phone)
                 .NotEmpty().WithMessage("Phone number is required.")
-                .Matches(@"^\d{10-15}$").WithMessage("Phone number must be 10-15 digits.");
+                .Matches(@"^\d{10,15}$").WithMessage("Phone number must be 10-15 digits.");
 
             RuleFor(x => x.Street)
                 .NotEmpty().WithMessage("Street is required.")

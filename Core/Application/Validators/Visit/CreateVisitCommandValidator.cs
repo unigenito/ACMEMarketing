@@ -15,7 +15,7 @@ namespace Application.Validators.Visit
 
             RuleFor(x => x.VisitDate)
                 .NotEmpty().WithMessage("Visit date is required.")
-                .LessThanOrEqualTo(DateTime.Now).WithMessage("Visit date cannot be in the past.");
+                .GreaterThanOrEqualTo(DateTime.Now).WithMessage("Visit date cannot be in the past.");
 
             RuleFor(x => x.Purpose)
                 .NotEmpty().WithMessage("Purpose is required.")
