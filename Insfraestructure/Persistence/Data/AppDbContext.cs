@@ -1,4 +1,5 @@
-﻿using Domain.Common;
+﻿using Application.Interfaces;
+using Domain.Common;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,11 +7,16 @@ namespace Persistence;
 
 public class AppDbContext: DbContext
 {
+    private readonly IDateTimeService _dateTimeService;
+    
+    public AppDbContext(DbContextOptions<AppDbContext> options, IDateTimeService dateTimeService):base(options)
+    {
+        _dateTimeService = dateTimeService;
+    }
+
     public DbSet<Visit> Visits { get; set; }
     public DbSet<Visitor> Visitors { get; set; }
     public DbSet<Customer> Customers { get; set; }
-    public AppDbContext(DbContextOptions<AppDbContext> options):base(options) {}
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
@@ -27,12 +33,12 @@ public class AppDbContext: DbContext
             switch (entry.State)
             {
                 case EntityState.Added:
-                    entry.CurrentValues["CreatedAt"] = DateTime.Now;
-                    entry.CurrentValues["UpdatedAt"] = DateTime.Now;
+                    entry.CurrentValues["CreatedDate"] = _dateTimeService.NowUtc;
+                    entry.CurrentValues["CreatedBy"] = "Uknown";
                     break;
                 case EntityState.Modified:
-                    entry.CurrentValues["UpdatedAt"] = DateTime.Now;
-                    entry.CurrentValues["CreatedAt"] = DateTime.Now;
+                    entry.CurrentValues["LastModifiedDate"] = _dateTimeService.NowUtc;
+                    entry.CurrentValues["LastModifiedBy"] = "Uknown";
                     break;
             }
         }
