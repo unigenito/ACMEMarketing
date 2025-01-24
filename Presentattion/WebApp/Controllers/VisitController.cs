@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ACMEMarketing.Core.Application.Features.Visitors.Queries;
 using Application.DTOs;
+using Application.Features.Customers.Queries;
 using Application.Features.Visits.Commands;
 using Application.Features.Visits.Queries;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Controllers.Base.Controllers;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp.Extentions;
 
 namespace WebApp.Controllers;
@@ -22,8 +25,13 @@ public class VisitController : BaseController
         return View(await Mediator.Send(new GetVisitById(id)));
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        var visitors = await Mediator.Send(new GetAllVisitors());
+        ViewBag.Visitors = new SelectList(visitors.Select(v => new { v.Id, FullName = v.Name + " " + v.LastName }), "Id", "FullName");
+        var customers = await Mediator.Send(new GetAllCustomers());
+        ViewBag.Customers = new SelectList(customers.Select(v => new { v.Id, FullName = v.FirstName + " " + v.LastName }), "Id", "FullName");
+        
         return View();
     }
 

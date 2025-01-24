@@ -15,6 +15,10 @@ namespace Application.Validators.Customer
                 .NotEmpty().WithMessage("Last name is required.")
                 .MaximumLength(50).WithMessage("Last name must not exceed 50 characters.");
 
+            RuleFor(x => x.Sex)
+                .NotEmpty().WithMessage("Sex is required.")
+                .MaximumLength(10).WithMessage("Sex must not exceed 10 characters.");
+
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("Email is required.")
                 .EmailAddress().WithMessage("A valid email is required.");
@@ -34,6 +38,14 @@ namespace Application.Validators.Customer
             RuleFor(x => x.ZipCode)
                 .NotEmpty().WithMessage("Zip code is required.")
                 .Matches(@"^\d{5}$").WithMessage("Zip code must be 5 digits.");
+
+            RuleFor(x => x.Country)
+                .NotEmpty().WithMessage("Country is required.")
+                .MaximumLength(50).WithMessage("Country must not exceed 50 characters.");
+
+            RuleFor(x => x.Identification)
+                .NotEmpty().WithMessage("Identification is required.")
+                .Matches(@"^\d{9}$").WithMessage("Identification must be 9 digits.");
         }
     }
 }

@@ -3,6 +3,7 @@ using Application.Features.Customers.Command;
 using Application.Features.Customers.Queries;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApp.Controllers.Base.Controllers;
 using WebApp.Extentions;
 
@@ -24,6 +25,12 @@ public class CustomerController : BaseController
 
     public IActionResult Create()
     {
+        ViewBag.Genders = new SelectList(new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Male", Value = "Male" },
+            new SelectListItem { Text = "Female", Value = "Female" }
+        }, "Value", "Text");
+
         return View();
     }
 
@@ -33,7 +40,8 @@ public class CustomerController : BaseController
     {
         try
         {
-
+            await Mediator.Send(command);
+            return RedirectToAction(nameof(Index));
         }
         catch (ValidationException e)
         {
@@ -45,8 +53,6 @@ public class CustomerController : BaseController
             Console.WriteLine(e);
             throw;
         }
-        
-        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> Edit(int id)
@@ -70,6 +76,8 @@ public class CustomerController : BaseController
                 customer.ZipCode,
                 customer.Street
             ));
+            
+            return RedirectToAction(nameof(Index));
         }
         catch (ValidationException e)
         {
@@ -82,7 +90,6 @@ public class CustomerController : BaseController
             throw;
         }
         
-        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> Delete(int id)

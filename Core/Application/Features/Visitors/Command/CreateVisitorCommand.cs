@@ -5,14 +5,16 @@ using MediatR;
 
 namespace Application.Features.Visitors.Command
 {
-    public record CreateVisitorCommand(
-        string Name,
-        string LastName,
-        string Email,
-        DateTime VisitDate,
-        string Position,
-        string Department,
-        string Phone) : IRequest<Unit>;
+    public class CreateVisitorCommand : IRequest<Unit>
+    {
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public DateTime VisitDate { get; set; }
+        public string Position { get; set; }
+        public string Department { get; set; }
+        public string Phone { get; set; }
+    }
 
     public class CreateVisitorCommandHandler : IRequestHandler<CreateVisitorCommand, Unit>
     {

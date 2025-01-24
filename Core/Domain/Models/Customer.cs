@@ -34,11 +34,11 @@ namespace Domain.Models
         /// Gets or sets the phone number of the customer.
         /// </summary>
         public string PhoneNumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets the visits associated with the customer.
+        
+        // <summary>
+        /// Gets or sets the country of the customer.
         /// </summary>
-        public ICollection<Visit> Visits { get; set; }
+        public string Country { get; set; }
 
          /// <summary>
         /// Gets or sets the street of the customer.
@@ -56,5 +56,9 @@ namespace Domain.Models
         /// Set if the customer is deleted.
         /// </summary>
         public bool IsDeleted { get; set; }
+        /// <summary>
+        /// Gets or sets the visits associated with the customer.
+        /// </summary>
+        public ICollection<Visit> Visits { get; set; }
     }
 }

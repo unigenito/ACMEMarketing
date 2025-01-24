@@ -1,12 +1,14 @@
 
 using Application;
 using Persistence;
+using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSharedLayer();
 builder.Services.AddApplicationLayer();
 builder.Services.AddInsfraestructureLayer(builder.Configuration);
 
